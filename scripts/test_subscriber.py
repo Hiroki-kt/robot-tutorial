@@ -1,14 +1,7 @@
 #!/usr/bin/env python
 import rospy
-<<<<<<< HEAD
 from geometry_msgs.msg import Point
 from std_msgs.msg import Int32
-=======
-# from spring_seminar.msg import Pos
-# from spring_seminar.msg import State
-from std_msgs.msg import UInt8
-from geometry_msgs.msg import Point
->>>>>>> 6ce1c030b5d5bd04e26c2e70f3445dbc49b191cc
 
 def callback(data):
     rospy.loginfo(rospy.get_caller_id() + "%s,%s,%s",data.x, data.y,data.z)
