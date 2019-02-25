@@ -20,5 +20,6 @@ def state_subscriber():
     rospy.spin()
 
 if __name__ == "__main__":
-    pos_subscriber()
-    #state_subscriber()
+    rospy.init_node('Test_Sub', anonymous=True)
+
+    rospy.Subscriber("state", Int32, callback)
