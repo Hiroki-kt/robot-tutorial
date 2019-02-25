@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 import rospy
-from spring_seminar.msg import Pos
-from spring_seminar.msg import State
+from geometry_msgs.msg import Point
+from std_msgs.msg import Int32
 
 def pos_publisher():
     pub = rospy.Publisher('position', Pos, queue_size=10)
@@ -13,9 +13,9 @@ def pos_publisher():
     z_pos = 1.0
     msg = Pos()
     while not rospy.is_shutdown():
-        msg.x_pos = x_pos
-        msg.y_pos = y_pos
-        msg.z_pos = z_pos
+        msg.x = x_pos
+        msg.y = y_pos
+        msg.z = z_pos
 
         rospy.loginfo("Position:%s,%s,%s" ,x_pos, y_pos, z_pos)
         pub.publish(msg)
@@ -26,9 +26,9 @@ def state_publisher():
     rospy.init_node('test_pub', anonymous=True)
     r = rospy.Rate(1)
     state = 0
-    msg = State()
+    msg = Int32()
     while not rospy.is_shutdown():
-        msg.State = state
+        msg.data = state
 
         rospy.loginfo("State:" + state)
         pub.publish(msg)
