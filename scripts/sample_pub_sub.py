@@ -1,29 +1,31 @@
 #! /usr/bin/env python
 import rospy
-from spring_seminar.msg import Pos
-from spring_seminar.msg import State
+#from spring_seminar.msg import Pos
+#from spring_seminar.msg import State
+from std_msgs.msg import UInt32
+from geometry_msgs.msg import Point
 
 def sample_pos_pub(x,y,z):
-    pub = rospy.Publisher('sample_position', Pos, queue_size=10)
+    pub = rospy.Publisher('sample_position', Point, queue_size=10)
     rospy.init_node('sample', anonymous=True)
     r = rospy.Rate(1)
-    msg = Pos()
+    msg = Point()
     while not rospy.is_shutdown():
-        msg.x_pos = x
-        msg.y_pos = y
-        msg.z_pos = z
+        msg.x = x
+        msg.y = y
+        msg.z = z
 
         rospy.loginfo("Position:x:%s,y:%s,z:%s",x,y,z)
         pub.publish(msg)
         r.sleep()
 
 def sample_state_pub(s):
-    pub = rospy.Publisher('state', State, queue_size=10)
+    pub = rospy.Publisher('state', UInt32, queue_size=10)
     rospy.init_node('sample', anonymous=True)
     r = rospy.Rate(1)
-    msg = State()
+    msg = UInt32()
     while not rospy.is_shutdown():
-        msg.State = s
+        msg.data = s
 
         rospy.loginfo("State:%s",s)
         pub.publish(msg)
@@ -32,7 +34,7 @@ def sample_state_pub(s):
 def callback_pos(data):
     # rospy.loginfo(rospy.get_caller_id() + "%s,%s,%s",data.x_pos, data.y_pos,data.z_pos)
     # samthing code?
-    sample_pos_pub(data.x_pos +2 ,data.y_pos + 1 ,data.z_pos + 3)
+    sample_pos_pub(data.x +2 ,data.y + 1 ,data.z + 3)
 
 def callback_state(data):
     rospy.loginfo(rospy.get_caller_id() + "%s", data.data)
